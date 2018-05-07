@@ -214,7 +214,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1824974759304086}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.02, z: 0}
+  m_LocalPosition: {x: -32.62908, y: 5.0299997, z: 0}
   m_LocalScale: {x: 0.90624636, y: 0.9062466, z: 0.9062466}
   m_Children:
   - {fileID: 4891397271844062}
@@ -649,7 +649,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 9a2ac57d3798750458ec0cc82a9f68c2, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 0.3
   m_Pitch: 1
@@ -733,6 +733,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationSpeed: 200
   thrustSpeed: 100
+  engineSound: {fileID: 8300000, guid: 9a37e5b4c23fd8d4bab77e3621667b2d, type: 3}
+  explosionSound: {fileID: 8300000, guid: 20f43b6ee95fbab4f80a7c448e150456, type: 3}
+  finishSound: {fileID: 8300000, guid: 08fabce5de94d874798a32cf02f7e086, type: 3}
+  winSound: {fileID: 8300000, guid: 3ddfc5efc999a4448a46fd39790311ec, type: 3}
 --- !u!136 &136402506330532942
 CapsuleCollider:
   m_ObjectHideFlags: 1
