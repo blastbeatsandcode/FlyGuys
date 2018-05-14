@@ -66,8 +66,8 @@ public class CollisionsHandler : MonoBehaviour {
         {
             print(other.gameObject + " picked up " + this.gameObject + "!");
             if (playAudio) audio.PlayOneShot(pickupSound);
+            HandleDestroy();
         }
-        HandleDestroy();
     }
 
     // Handle collision events
@@ -76,6 +76,7 @@ public class CollisionsHandler : MonoBehaviour {
         // Check if the collision is coming from the colliding object
         if (collision.gameObject == this.collidingObject)
         {
+            if (playAudio) audio.PlayOneShot(pickupSound);
             HandleDestroy();
         }
     }
@@ -87,6 +88,10 @@ public class CollisionsHandler : MonoBehaviour {
             // Disable the gameObject's Mesh Renderer and collider so we can't see or interact with it anymore until it is completely deleted from the scene
             gameObject.GetComponent<MeshRenderer>().enabled = false;
             gameObject.GetComponent<Collider>().enabled = false;
+
+            // Destroy any light components
+            GameObject.Destroy(gameObject.GetComponentInChildren<Light>());
+            GameObject.Destroy(gameObject.GetComponent<Light>());
 
             // Set length of delay for the object to be destroyed; we have to do this so the audio plays correctly
             GameObject.Destroy(gameObject, deleteDelay);

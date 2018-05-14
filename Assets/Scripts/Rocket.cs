@@ -34,6 +34,23 @@ public class Rocket : MonoBehaviour {
     [Tooltip("Audio for Winning the game")]
     [SerializeField] AudioClip winSound;
 
+
+    [Header("Particle Settings")]
+
+    [Tooltip("Particles on thrust")]
+    [SerializeField] ParticleSystem thrusterParticles;
+
+    [Tooltip("Particles on death")]
+    [SerializeField] ParticleSystem explosionParticles;
+
+    [Tooltip("Particles for win")]
+    [SerializeField] ParticleSystem winParticles;
+
+    [Header("Misc. Settings")]
+
+    [Tooltip("Sets delay between levels. Defaults to 2f.")] float levelLoadDelay = 2f;
+
+
     // Use this for initialization
     void Start () {
         // Grab rigidbody component from gameobject
@@ -82,6 +99,8 @@ public class Rocket : MonoBehaviour {
         if (SceneManager.GetActiveScene().buildIndex == (SceneManager.sceneCountInBuildSettings - 1))
         {
             print("You're the best pilot in all of space! You win!");
+            thrusterParticles.Stop();
+            winParticles.Play();
             audio.PlayOneShot(winSound);
             return;
         }
@@ -90,14 +109,16 @@ public class Rocket : MonoBehaviour {
             audio.PlayOneShot(finishSound);
         }
 
-        Invoke("LoadNextScene", 1f);    // Invoke LoadNextScene as coroutine with 1 second delay
+        Invoke("LoadNextScene", levelLoadDelay);    // Invoke LoadNextScene as coroutine with 1 second delay
     }
 
     private void HandleDying()
     {
         state = State.Dying;
         audio.PlayOneShot(explosionSound);
-        Invoke("RestartLevel", 1f);
+        thrusterParticles.Stop(); // Stop thruster particles
+        explosionParticles.Play();
+        Invoke("RestartLevel", levelLoadDelay);
     }
 
     private  void RestartLevel()
@@ -138,6 +159,7 @@ public class Rocket : MonoBehaviour {
         else
         {
             audio.Stop();
+            thrusterParticles.Stop();
         }
     }
 
@@ -152,6 +174,7 @@ public class Rocket : MonoBehaviour {
         {
             this.audio.PlayOneShot(engineSound);
         }
+        thrusterParticles.Play();
     }
 
     private void RespondToRotateInput()
