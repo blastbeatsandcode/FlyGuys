@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -8,6 +9,7 @@ public class Rocket : MonoBehaviour {
     private Rigidbody rigidbody;
     private AudioSource audio;
     private State state;
+    private bool collisionsEnabled = false;
 
     private enum State {Alive, Dying, Transcending}
 
@@ -70,12 +72,31 @@ public class Rocket : MonoBehaviour {
             RespondToThrustInput();
             RespondToRotateInput();
         }
+
+        // If it is a debug build, respond to the debug keys
+        if (Debug.isDebugBuild)
+        {
+            RespondToDebugKeys();
+        }
 	}
+
+    /* Respond to debug keys while in debug mode */
+    private void RespondToDebugKeys()
+    {
+        if (Input.GetKeyDown(KeyCode.L)) // If key is L, advance to next level
+        {
+            LoadNextScene();
+        }
+        else if (Input.GetKeyDown(KeyCode.C)) // If the key is C, toggle collisions
+        {
+            collisionsEnabled = !collisionsEnabled;
+        }
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
         // Check if rocket is anything other than alive; if so, don't react to any other collisions
-        if (this.state != State.Alive) return;
+        if (this.state != State.Alive || collisionsEnabled) return;
 
         switch(collision.gameObject.tag)
         {
@@ -102,6 +123,7 @@ public class Rocket : MonoBehaviour {
             thrusterParticles.Stop();
             winParticles.Play();
             audio.PlayOneShot(winSound);
+            Invoke("LoadFirstScene", levelLoadDelay + 2f);
             return;
         }
         else
@@ -133,12 +155,16 @@ public class Rocket : MonoBehaviour {
         // Check if last level, then show win screen
         if (SceneManager.GetActiveScene().buildIndex == (SceneManager.sceneCountInBuildSettings - 1))
         {
-            print("You're the best pilot in all of space! You win!");
-            audio.PlayOneShot(winSound);
-            return;
+            HandleFinish();
         }
         SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex) + 1);
         print("Finished!");
+    }
+
+    /* Load the first scene. */
+    private void LoadFirstScene()
+    {
+        SceneManager.LoadScene(0);
     }
 
     private void OnTriggerEnter(Collider other)
