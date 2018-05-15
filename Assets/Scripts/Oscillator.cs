@@ -4,19 +4,31 @@ using UnityEngine;
 
 [DisallowMultipleComponent]
 public class Oscillator : MonoBehaviour {
-    [Tooltip("The period of the oscillation. Defaults to 2f.")][SerializeField] float period = 2f; // 0 for not moved, 1 fully moved.
+    [Header("Oscillation Behaviors")]
+    [Tooltip("The period of the oscillation. Increasing this number makes the oscillation move slower. Defaults to 2f.")]
+    [SerializeField] float period = 2f; // 0 for not moved, 1 fully moved.
 
     [Range(0, 1)] [SerializeField] float movementFactor; // 0 for not moved, 1 fully moved.
     
 
     Vector3 startingPos;
 
-    //[Tooltip("Where the oscillation should end")]
-    [SerializeField] Vector3 endPos;
+    [Tooltip("Where the oscillation should end. Defaults to 10f.")]
+    [SerializeField] float endPos;
 
-	// Use this for initialization
-	void Start () {
+    [Tooltip("Move in X direction.")]
+    [SerializeField] bool moveX;
+
+    [Tooltip("Move in Y direction.")]
+    [SerializeField] bool moveY;
+
+    [Tooltip("Move in Z direction.")]
+    [SerializeField] bool moveZ;
+
+    // Use this for initialization
+    void Start () {
         this.startingPos = gameObject.transform.position; // Get starting position
+        this.endPos = 10f;
 	}
 	
 	// Update is called once per frame
@@ -33,6 +45,8 @@ public class Oscillator : MonoBehaviour {
         movementFactor = rawSinWave / 2f + 0.5f;
 
         // Set the transform by getting the current position and moving it up
-        gameObject.transform.position = new Vector3(transform.position.x, (startingPos.y + (movementFactor * 10f)), transform.position.z);
+        if (this.moveX) gameObject.transform.position = new Vector3((startingPos.x + (movementFactor * endPos)), transform.position.y, transform.position.z);
+        if (this.moveY) gameObject.transform.position = new Vector3(transform.position.x, (startingPos.y + (movementFactor * endPos)), transform.position.z);
+        if (this.moveZ) gameObject.transform.position = new Vector3(transform.position.x, transform.position.y, (startingPos.z + (movementFactor * endPos)));
     }
 }
