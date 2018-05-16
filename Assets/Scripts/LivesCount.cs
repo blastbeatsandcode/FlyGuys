@@ -11,15 +11,10 @@ public class LivesCount : MonoBehaviour
     public TextMeshProUGUI livesText;
     //GameObject gameManager;
 
-    private void Start()
-    {
-        numLives = 5;
-    }
-
-    // Set level number to active scene
+    // Update the number of lives in the HUD
     void Update()
     {
-        //TODO: actually get the fuel amount
-        livesText.text = "LIVES x" + numLives.ToString();
+        numLives = GameManager.Instance.Lives;
+        livesText.text = "LIVES x " + numLives.ToString();
     }
 }

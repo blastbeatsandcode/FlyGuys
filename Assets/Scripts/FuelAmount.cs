@@ -11,15 +11,16 @@ public class FuelAmount : MonoBehaviour
     public TextMeshProUGUI fuelText;
     //GameObject gameManager;
 
-    private void Start()
-    {
-        fuelAmt = 100.0f;
-    }
 
     // Set level number to active scene
     void Update()
     {
-       //TODO: actually get the fuel amount
+        fuelAmt = GameManager.Instance.Fuel;
+
+        // Adjust the fuel amount so that it doesn't show a negative number
+        if (fuelAmt <= 0.0f) fuelAmt = 0.0f;
+
+        //TODO: actually get the fuel amount
         fuelText.text = "FUEL LEVEL " + fuelAmt.ToString("F2");
     }
 }

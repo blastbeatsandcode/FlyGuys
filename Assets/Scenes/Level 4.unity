@@ -294,7 +294,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4999583514391834, guid: 0bb68db70b719ad419f4f30f0e1397dc, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 3.05
+      value: 4.05
       objectReference: {fileID: 0}
     - target: {fileID: 4999583514391834, guid: 0bb68db70b719ad419f4f30f0e1397dc, type: 2}
       propertyPath: m_LocalPosition.z
@@ -667,9 +667,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   period: 10
   movementFactor: 0
-  endPos: NaN
+  endPos: 10
   moveX: 0
-  moveY: 0
+  moveY: 1
   moveZ: 0
 --- !u!1 &515217745
 GameObject:
@@ -764,6 +764,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 556658376}
+  - component: {fileID: 556658377}
   m_Layer: 0
   m_Name: Pickups
   m_TagString: Untagged
@@ -785,6 +786,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &556658377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 556658375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8cd3d44556c89a45b3139437a82ea2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  period: 2
+  movementFactor: 0
+  endPos: 0
+  moveX: 0
+  moveY: 0
+  moveZ: 0
 --- !u!1001 &579520543
 Prefab:
   m_ObjectHideFlags: 0
@@ -1223,7 +1241,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 873543258}
   m_LocalRotation: {x: -0.031248486, y: 0.023219418, z: 0.9970931, w: -0.06549704}
-  m_LocalPosition: {x: 6.6000004, y: -16.71, z: 18.82}
+  m_LocalPosition: {x: 6.38, y: -15, z: 18.73}
   m_LocalScale: {x: 2.064641, y: 19.265287, z: 8.81106}
   m_Children: []
   m_Father: {fileID: 1336542859}
@@ -1295,10 +1313,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   period: 10
-  movementFactor: 0
-  endPos: NaN
+  movementFactor: 1
+  endPos: 10
   moveX: 0
-  moveY: 0
+  moveY: 1
   moveZ: 0
 --- !u!1 &922903385
 GameObject:
@@ -2580,9 +2598,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   period: 10
   movementFactor: 0
-  endPos: NaN
+  endPos: 10
   moveX: 0
-  moveY: 0
+  moveY: 1
   moveZ: 0
 --- !u!1 &2068385463
 GameObject:

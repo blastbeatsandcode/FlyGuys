@@ -13,6 +13,14 @@ public class Rocket : MonoBehaviour {
 
     private enum State {Alive, Dying, Transcending}
 
+    [Header("Level Settings")]
+
+    [Tooltip("Sets the speed of fuel depletion. Defaults to 7.")]
+    [SerializeField] int depletionRate = 7;
+
+    [Tooltip("Set the starting fuel amount for the rocket. Defaults to 100f.")]
+    [SerializeField] float fuelAmount = 100f;
+
     [Header("Physics Settings")]
 
     [Tooltip("Speed of left or right rotation")]
@@ -55,6 +63,10 @@ public class Rocket : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        // Set GameManager information for amount of fuel and fuel depletion of the rocket
+        GameManager.Instance.Fuel = fuelAmount;
+        GameManager.Instance.DepletionRate = depletionRate;
+
         // Grab rigidbody component from gameobject
         this.rigidbody = GetComponent<Rigidbody>();
 
@@ -67,10 +79,15 @@ public class Rocket : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        // If the player runs out of fuel, die
         if (this.state == State.Alive)
         {
             RespondToThrustInput();
             RespondToRotateInput();
+            if (GameManager.Instance.Fuel <= 0)
+            {
+                HandleDying(); // If the player has run out of fuel, die 
+            }
         }
 
         // If it is a debug build, respond to the debug keys
@@ -140,12 +157,22 @@ public class Rocket : MonoBehaviour {
         audio.PlayOneShot(explosionSound);
         thrusterParticles.Stop(); // Stop thruster particles
         explosionParticles.Play();
+        GameManager.Instance.Lives--; // Decrease number of lives in GameManager
         Invoke("RestartLevel", levelLoadDelay);
     }
 
     private  void RestartLevel()
     {
         print("Exploded!");
+        if (GameManager.Instance.Lives == 0)
+        {
+            // If the player runs out of lives, go to menu screen
+            // TODO: Create game over screen
+            SceneManager.LoadScene(0);
+            print("Game Over!");
+            GameObject.Destroy(GameManager.Instance); // delete the game manager to restart fresh
+            return;
+        }
         SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex)); // Restart on current scene
     }
 
@@ -194,6 +221,7 @@ public class Rocket : MonoBehaviour {
         // Relative force will move the object in the direction specified relative to where it's currently positioned
         float thrustThisFrame = thrustSpeed * Time.deltaTime;
         rigidbody.AddRelativeForce(Vector3.up * thrustThisFrame);
+        GameManager.Instance.Fuel -= (depletionRate * Time.deltaTime); // Reduce fuel
 
         // Play audio if it is not already playing
         if (!audio.isPlaying)

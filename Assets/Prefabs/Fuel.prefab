@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 54327784184819820}
   - component: {fileID: 114086640819163058}
   - component: {fileID: 82052241902016278}
+  - component: {fileID: 114409541845303744}
   m_Layer: 0
   m_Name: Fuel
   m_TagString: Pick Up
@@ -292,3 +293,15 @@ MonoBehaviour:
   deleteDelay: 3
   playAudio: 1
   pickupSound: {fileID: 8300000, guid: a4717966cb9c2438d9f2079ae427098c, type: 3}
+--- !u!114 &114409541845303744
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1438417090605846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d12559fc7174e95468a30d04d6fc3c7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amountFuel: 25

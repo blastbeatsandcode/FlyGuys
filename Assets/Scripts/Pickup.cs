@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class Pickup : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    [Tooltip("Amount to increase fuel. Defaults to 25f.")]
+    [SerializeField] float amountFuel = 25f;
+
+    // Use this for initialization
+    private void OnTriggerEnter(Collider other)
+    {
+        GameManager.Instance.Fuel += amountFuel;
+    }
 }
