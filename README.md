@@ -1,7 +1,8 @@
 # FlyGuys
 A "totally" realistic spaceflight simulator. A simple Unity game project. 
 
-Fly the ship to the green landing pad and try not to crash it. Everything will blow you up except for the landing pad and the glowing red fuel pickups. You'll want to grab those.
+Fly the ship to the green landing pad and try not to crash it. Everything will blow you up except for the landing pad and the glowing red fuel pickups.
+You'll want to grab those, because when you run out of fuel you also blow up.
 
 ### Controls
 A and D keys to rotate left and right respectively. Apply upward thrust with spacebar. Just like a real rocket ship.
@@ -10,6 +11,9 @@ A and D keys to rotate left and right respectively. Apply upward thrust with spa
 While the game is a development/debug build, you can access development controls:
 - C turns off collisions.
 - L advances to next level.
+- E turns on Easy Mode.
+- N turns on Normal Mode.
+- H turns on Hard Mode.
 
 
 

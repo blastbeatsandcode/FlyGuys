@@ -9,6 +9,9 @@ public class GameManager : MonoBehaviour
     public float Fuel { get; set; } // Amount of fuel rocket has to start level
     public int Lives { get; set; }  // Amount of lives rocket has left
     public int DepletionRate { get; set; } // Rate of depletion of the fuel
+    public string DebugSelection { get; set; } // Sets the value of the debug text on the HUD
+
+    public Difficulty Difficulty;
 
     public static GameManager Instance
     {
@@ -33,7 +36,10 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        // Start out with 5 lives
-        Lives = 5;
+        // Start out with 10 lives
+        Lives = 10;
     }
 }
+
+// Define difficulty settings
+public enum Difficulty { EASY, NORMAL, HARD }

@@ -11,6 +11,22 @@ public class MainMenu : MonoBehaviour {
     // Accepts a difficulty, 0 easy, 1 normal, 2 hard
 	public void PlayGame (int difficulty)
     {
+        // Set game difficulty in game manager
+        switch (difficulty)
+        {
+            case 0:
+                GameManager.Instance.Difficulty = Difficulty.EASY;
+                break;
+            case 1:
+                GameManager.Instance.Difficulty = Difficulty.NORMAL;
+                break;
+            case 2:
+                GameManager.Instance.Difficulty = Difficulty.HARD;
+                break;
+            default:
+                break;
+        }
+        
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
@@ -26,5 +42,3 @@ public class MainMenu : MonoBehaviour {
         audioMixer.SetFloat("volume", volume);
     }
 }
-
-public enum Difficulty { EASY, MEDIUM, HARD }

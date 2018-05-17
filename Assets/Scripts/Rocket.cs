@@ -102,11 +102,37 @@ public class Rocket : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.L)) // If key is L, advance to next level
         {
+            GameManager.Instance.DebugSelection = "Next Level";
             LoadNextScene();
         }
         else if (Input.GetKeyDown(KeyCode.C)) // If the key is C, toggle collisions
         {
             collisionsEnabled = !collisionsEnabled;
+            GameManager.Instance.DebugSelection = collisionsEnabled ?  "Collisions: ON" : "Collisions: OFF";
+        }
+        else if (Input.GetKeyDown(KeyCode.E)) // Switch to easy
+        {
+            if (GameManager.Instance.Difficulty != Difficulty.EASY)
+            {
+                GameManager.Instance.Difficulty = Difficulty.EASY;
+                GameManager.Instance.DebugSelection = "Difficulty: Easy";
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.N)) // Switch to normal
+        {
+            if (GameManager.Instance.Difficulty != Difficulty.NORMAL)
+            {
+                GameManager.Instance.Difficulty = Difficulty.NORMAL;
+                GameManager.Instance.DebugSelection = "Difficulty: Normal";
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.H)) // Switch to hard
+        {
+            if (GameManager.Instance.Difficulty != Difficulty.HARD)
+            {
+                GameManager.Instance.Difficulty = Difficulty.HARD;
+                GameManager.Instance.DebugSelection = "Difficulty: Hard";
+            }
         }
     }
 
@@ -157,7 +183,7 @@ public class Rocket : MonoBehaviour {
         audio.PlayOneShot(explosionSound);
         thrusterParticles.Stop(); // Stop thruster particles
         explosionParticles.Play();
-        GameManager.Instance.Lives--; // Decrease number of lives in GameManager
+        if (GameManager.Instance.Difficulty == Difficulty.HARD)GameManager.Instance.Lives--; // Decrease number of lives in GameManager if playing on hard mode
         Invoke("RestartLevel", levelLoadDelay);
     }
 
@@ -221,7 +247,12 @@ public class Rocket : MonoBehaviour {
         // Relative force will move the object in the direction specified relative to where it's currently positioned
         float thrustThisFrame = thrustSpeed * Time.deltaTime;
         rigidbody.AddRelativeForce(Vector3.up * thrustThisFrame);
-        GameManager.Instance.Fuel -= (depletionRate * Time.deltaTime); // Reduce fuel
+
+        // If playing on normal or hard mode, run down fuel
+        if (GameManager.Instance.Difficulty != Difficulty.EASY)
+        {
+            GameManager.Instance.Fuel -= (depletionRate * Time.deltaTime); // Reduce fuel
+        }
 
         // Play audio if it is not already playing
         if (!audio.isPlaying)

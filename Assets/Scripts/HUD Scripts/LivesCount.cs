@@ -14,7 +14,14 @@ public class LivesCount : MonoBehaviour
     // Update the number of lives in the HUD
     void Update()
     {
-        numLives = GameManager.Instance.Lives;
-        livesText.text = "LIVES x " + numLives.ToString();
+        if (GameManager.Instance.Difficulty == Difficulty.HARD)
+        {
+            numLives = GameManager.Instance.Lives;
+            livesText.text = "LIVES x " + numLives.ToString();
+        }
+        else
+        {
+            livesText.text = "INF LIVES";
+        }
     }
 }
