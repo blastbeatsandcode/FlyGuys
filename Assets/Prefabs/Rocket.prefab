@@ -978,6 +978,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1509c9cbba85c1459731b11539c7e50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  depletionRate: 7
+  fuelAmount: 25
   rotationSpeed: 200
   thrustSpeed: 100
   engineSound: {fileID: 8300000, guid: 9a37e5b4c23fd8d4bab77e3621667b2d, type: 3}
@@ -987,6 +989,9 @@ MonoBehaviour:
   thrusterParticles: {fileID: 198851086855573540}
   explosionParticles: {fileID: 198452322440195482}
   winParticles: {fileID: 198620830937144608}
+  levelLoadDelay: 2
+  winText: {fileID: 0}
+  loseText: {fileID: 0}
 --- !u!136 &136402506330532942
 CapsuleCollider:
   m_ObjectHideFlags: 1

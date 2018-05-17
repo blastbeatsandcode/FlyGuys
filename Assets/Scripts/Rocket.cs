@@ -58,7 +58,14 @@ public class Rocket : MonoBehaviour {
 
     [Header("Misc. Settings")]
 
-    [Tooltip("Sets delay between levels. Defaults to 2f.")] float levelLoadDelay = 2f;
+    [Tooltip("Sets delay between levels. Defaults to 2f.")]
+    [SerializeField]float levelLoadDelay = 2f;
+
+    [Tooltip("UI Element to show when player has won.")]
+    [SerializeField]GameObject winText;
+
+    [Tooltip("UI Element to show when player has lost the game.")]
+    [SerializeField] GameObject loseText;
 
 
     // Use this for initialization
@@ -108,7 +115,7 @@ public class Rocket : MonoBehaviour {
         else if (Input.GetKeyDown(KeyCode.C)) // If the key is C, toggle collisions
         {
             collisionsEnabled = !collisionsEnabled;
-            GameManager.Instance.DebugSelection = collisionsEnabled ?  "Collisions: ON" : "Collisions: OFF";
+            GameManager.Instance.DebugSelection = collisionsEnabled ?  "Collisions: OFF" : "Collisions: ON";
         }
         else if (Input.GetKeyDown(KeyCode.E)) // Switch to easy
         {
@@ -162,11 +169,11 @@ public class Rocket : MonoBehaviour {
         this.state = State.Transcending;
         if (SceneManager.GetActiveScene().buildIndex == (SceneManager.sceneCountInBuildSettings - 1))
         {
-            print("You're the best pilot in all of space! You win!");
+            winText.SetActive(true);
             thrusterParticles.Stop();
             winParticles.Play();
             audio.PlayOneShot(winSound);
-            Invoke("LoadFirstScene", levelLoadDelay + 2f);
+            Invoke("LoadFirstScene", levelLoadDelay + 5f);
             return;
         }
         else
@@ -187,16 +194,19 @@ public class Rocket : MonoBehaviour {
         Invoke("RestartLevel", levelLoadDelay);
     }
 
+    private void ReturnToMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+
     private  void RestartLevel()
     {
         print("Exploded!");
         if (GameManager.Instance.Lives == 0)
         {
-            // If the player runs out of lives, go to menu screen
-            // TODO: Create game over screen
-            SceneManager.LoadScene(0);
-            print("Game Over!");
-            GameObject.Destroy(GameManager.Instance); // delete the game manager to restart fresh
+            // If the player runs out of lives, show lose UI and return to menu screen       
+            loseText.SetActive(true);
+            Invoke("ReturnToMenu", 5f);
             return;
         }
         SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex)); // Restart on current scene

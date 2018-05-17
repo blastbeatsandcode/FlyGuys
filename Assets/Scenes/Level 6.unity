@@ -597,6 +597,16 @@ Prefab:
       propertyPath: rotationSpeed
       value: 300
       objectReference: {fileID: 0}
+    - target: {fileID: 114031299549434940, guid: ba38c180030e350418edb0f4143277df,
+        type: 2}
+      propertyPath: depletionRate
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 114031299549434940, guid: ba38c180030e350418edb0f4143277df,
+        type: 2}
+      propertyPath: loseText
+      value: 
+      objectReference: {fileID: 881612020}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ba38c180030e350418edb0f4143277df, type: 2}
   m_IsPrefabParent: 0
@@ -1281,6 +1291,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7ad02c7e20460314ab6f8bd81e007445, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &881612020 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1510628990593430, guid: 7ad02c7e20460314ab6f8bd81e007445,
+    type: 2}
+  m_PrefabInternal: {fileID: 881612019}
 --- !u!1 &922903385
 GameObject:
   m_ObjectHideFlags: 0

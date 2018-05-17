@@ -556,6 +556,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 114031299549434940, guid: ba38c180030e350418edb0f4143277df,
+        type: 2}
+      propertyPath: fuelAmount
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 114031299549434940, guid: ba38c180030e350418edb0f4143277df,
+        type: 2}
+      propertyPath: loseText
+      value: 
+      objectReference: {fileID: 1251267211}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ba38c180030e350418edb0f4143277df, type: 2}
   m_IsPrefabParent: 0
@@ -1971,6 +1981,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7ad02c7e20460314ab6f8bd81e007445, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1251267211 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1510628990593430, guid: 7ad02c7e20460314ab6f8bd81e007445,
+    type: 2}
+  m_PrefabInternal: {fileID: 1251267210}
 --- !u!1001 &1273619872
 Prefab:
   m_ObjectHideFlags: 0
