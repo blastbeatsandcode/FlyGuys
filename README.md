@@ -1,6 +1,8 @@
 # FlyGuys
 A "totally" realistic spaceflight simulator. A simple Unity game project. 
 
+:rocket: [Play the game on itch.io](https://psychobells.itch.io/flyguys)
+
 Fly the ship to the green landing pad and try not to crash it. Everything will blow you up except for the landing pad and the glowing red fuel pickups.
 You'll want to grab those, because when you run out of fuel you also blow up.
 
